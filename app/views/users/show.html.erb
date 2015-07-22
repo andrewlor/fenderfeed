@@ -22,10 +22,12 @@
     </div>
 
   </div>
-  <%if @user.id == @user_view.id%>
-    <form action="/profile/edit" method="GET">
-      <button type="submit" class="delete_button">Edit Profile</button>
-    </form>
+  <%if current_user%>
+    <%if @user.id == @user_view.id%>
+      <form action="/profile/edit" method="GET">
+        <button type="submit" class="delete_button">Edit Profile</button>
+      </form>
+    <%end%>
   <%end%>
 </div>
 
