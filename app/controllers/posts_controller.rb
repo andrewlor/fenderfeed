@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     content = params[:content]
     pathToFile = params[:pathToFile]
     category = params[:category].to_i
-    if title.nil? || pathToFile.nil? || category.nil?
+    if title.nil? || pathToFile.nil? || category == 0
       session[:error_newpost] = "Please fill required fields."
       redirect_to "/posts/new"
     else
