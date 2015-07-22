@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-3" style="padding:0px;">
+    <h1 style="padding:0px; margin:0px;"><%=@category.name%></h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-1" style="height: 30px;"></div>
+</div>
+
+<%@posts.reverse_order.each do |post|%>
+  
+  <div class="row">
+    <div class="col-md-3"></div>
+    <a href="/posts/<%=post.id%>">
+      <div class="col-md-6 box post">
+        <div class="col-md-10" style="margin: 0px; padding:0px;">
+          <h2><%=post.title%></h2>
+          <p>
+
+            </a>
+            <a href="/users/<%=post.user_id%>">
+              <%=User.find(post.user_id).first_name + " " + User.find(post.user_id).last_name%>
+            </a>
+            | <%=getTime(post.created_at)%> |
+            <a href="/categories/<%=post.category_id%>">
+              <%=Category.find(post.category_id).name%>
+            </a>
+            <a href="/posts/<%=post.id%>">
+
+          </p>
+        </div>
+
+        <div class="col-md-2" style="margin: 0px; padding:0px;">
+          </a>
+          <form action="/posts/<%=post.id%>/likes" method="POST">
+            <button style="float:right; padding: 5px;">
+              <p style="display: inline;"><%=post.likes.count%></p>
+              <%if post.likes.find_by(user_id: session[:user_id])%>
+                <img src="https://carsiteuploads.s3.amazonaws.com/imgs/thumbsUp3.png" style="width: 25px; display: inline; margin: 10px;">
+              <%else%>
+                <img src="https://carsiteuploads.s3.amazonaws.com/imgs/thumbsUp.png" style="width: 25px; display: inline; margin: 10px;">
+              <%end%>
+            </button>
+            <input type="hidden" name="redirect" value="<%=request.path_info%>">
+          </form>
+          <a href="/posts/<%=post.id%>">
+        </div>
+        <img src="<%=post.pathToFile%>" class="postImg">
+        <p><%=post.content%></p>
+      </div>
+    </a>
+  </div>
+ 
+
+  <div class="row">
+    <div class="col-md-1" style="height: 30px;"></div>
+  </div>
+<%end%>

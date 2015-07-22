@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6 box post">
+    <h2>New Post</h2>
+    <p><span><%=session[:error_newpost]%></span></p>
+    <form action="/posts/create" method="POST" enctype="multipart/form-data">
+        <label><input name="title" type="text" placeholder="Title" style="width: 300px;"> <span>*</span></label><br>
+        <label>Upload Image <span>*</span><br><input type="file" name="pathToFile" class="uploadButton"></label>
+        <label><br><select name="category">
+          <option value="" disabled selected>Select Category</option>
+          <option value="1">Modern Super</option>
+          <option value="2">Retro Super</option>
+          <option value="3">Hyper</option>
+          <option value="4">Modern Sports</option>
+          <option value="5">Retro Sports</option>
+          <option value="6">JDM Sports</option>
+          <option value="7">Saloons</option>
+          <option value="8">OffRoad</option>
+          <option value="9">Sports Utility</option>
+          <option value="10">Modern Hot Hatch</option>
+          <option value="11">Retro Hot Hatch</option>
+          <option value="12">Modern Muscle</option>
+          <option value="13">Retro Muscle</option>
+          <option value="14">Modern Rally</option>
+          <option value="15">Retro Rally</option>
+          <option value="16">GT</option>
+          <option value="17">Track Cars</option>
+        </select> <span>*</span></label>
+        <div style="width: 98%;">
+          <label><textarea name="content" type="text" placeholder="Say something about this post..." cols="90" rows="4"></textarea></label>
+        </div><br>
+        <p style="margin-top: 0px;"><span>Required Fields *</span></p>
+        <button type="submit">Post</button>
+    </form>
+  </div>
+</div>

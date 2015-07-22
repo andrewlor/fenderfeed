@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6 box">
+    <div class="col-md-10" style="margin: 0px; padding:0px;">
+      <h2><%=@post.title%></h2>
+      <p>
+        <a href="/users/<%=@post.user_id%>">
+          <%=User.find(@post.user_id).first_name + " " + User.find(@post.user_id).last_name%>
+        </a>
+        | <%=getTime(@post.created_at)%> |
+        <a href="/categories/<%=@post.category_id%>">
+        <%=Category.find(@post.category_id).name%>
+        </a>
+      </p>
+    </div>
+    <div class="col-md-2" style="margin: 0px; padding:0px;">
+      <form action="/posts/<%=@post.id%>/likes" method="POST">
+        <button style="float:right; padding: 5px;">
+          <p style="display: inline;"><%=@post.likes.count%></p>
+          <%if @post.likes.find_by(user_id: session[:user_id])%>
+            <img src="https://carsiteuploads.s3.amazonaws.com/imgs/thumbsUp3.png" style="width: 25px; display: inline; margin: 10px;">
+          <%else%>
+            <img src="https://carsiteuploads.s3.amazonaws.com/imgs/thumbsUp.png" style="width: 25px; display: inline; margin: 10px;">
+          <%end%>
+        </button>
+        <input type="hidden" name="redirect" value="<%=request.path_info%>">
+      </form>
+    </div>
+    <img src="<%=@post.pathToFile%>" class="postImg">
+    <p><%=@post.content%></p>
+  </div>
+  <%if session[:user_id]%>
+    <%if @post.user.email == User.find(session[:user_id]).email%>
+      <%= button_to "Delete Post", @post, :method => :delete, :class => 'delete_button'%>
+    <%end%>
+  <%end%>
+
+</div>
+
+<div class="row">
+  <div class="col-md-3" style="height: 30px;"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6 box">
+    <h3>Add a comment</h3>
+    <form action="/posts/<%=@post.id%>/comments" method="POST">
+      <fieldset>
+          <div style="width: 98%; padding-left: 10px;">
+            <textarea name="comment" type="text" placeholder="Add your nice comment here..." rows="4"></textarea>
+          </div>
+        <button type="submit">Add Comment +</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3" style="height: 30px;"></div>
+</div>
+
+<div class="row">
+  <div class="col-md-3" style="height: 40.5px;"></div>
+  <div class="col-md-6 box"><h2>Comments</h2></div>
+</div>
+
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6 box">
+    <%@post.comments.reverse_order.each do |comment|%>
+      <div class="col-md-12 white_line"></div>
+      <p><%=comment.comment%></p>
+      <p>
+        <a href="/users/<%=comment.user_id%>"><%=User.find(comment.user_id).first_name + " " + User.find(comment.user_id).last_name%><a>
+      </p>
+      <p><span><%=getTime(comment.created_at)%></span></p>
+    <%end%>
+  </div>
+</div>
+
+
+

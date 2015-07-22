@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css">
+  <title>Fenderfeed.com</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="shortcut icon" href="https://carsiteuploads.s3.amazonaws.com/imgs/ff.ico">
+</head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+  <div class="col-md-12 col-xs-12 box" style="height: 40.5px; position: fixed; z-index: 1; border-left:0px; padding-left:0px;">
+    <%if session[:user_id] || request.path_info != '/signup'%>
+
+    <a href="/" class="menu_icon">
+      <button class="col-md-2 button_no_hover" style="background-color: grey; margin: 0px; top:-10px; height: 40.5px; padding: 0px;">
+        <img src="https://carsiteuploads.s3.amazonaws.com/imgs/930.png" style="width: 50px;">
+        <h3 style="display:inline;">Fenderfeed.com</h3>
+      </button>
+      <div class="menu_icon_popup">
+        <div class="arrow_up"></div>
+        <div class="box" style="border-left:0; margin-left: 10px;">
+          <p>Fenderfeed.com is a car photo sharing network. Share photos of your car, your friend's car or your dream car.</p>
+        </div>
+      </div>
+    </a>
+    <div class="col-md-6"></div>
+    <a href="/posts/new"><button style="margin: 0px; top:-10px; height: 40.5px; padding: 0px;" class="col-md-1">New Post +</button></a>
+      <h3 class="col-md-1 menu_cars"><a>Browse</a>
+          <div class="menu_cars_popup">
+            <div class="arrow_up"></div>
+            <div class="box">
+              <div class="menu_cars_text">
+                <ul>
+                  <li>
+                    <a href="/categories"><button class="button_no_style">By Category</button></a>
+                  </li>
+                  <li>
+                    <a href="/"><button class="button_no_style">Trending</button></a>
+                  </li>
+                  <li>
+                    <a href="/new"><button class="button_no_style" type="submit" style="">New</button></a>
+                  </li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </h3>
+      <h3 class="col-md-2 menu_profile">
+        <%if session[:user_id]%>
+          Hi, <%=@user.first_name%>
+        <%else%>
+          <a href="/signup">Signup or Login</a>
+        <%end%>
+        <div class="menu_profile_popup">
+          <div class="arrow_up"></div>
+          <div class="box">
+            <div class="menu_profile_text">
+              <ul>
+                <li>
+                  <%if session[:user_id]%>
+                    <a href="/users/<%=@user.id%>"><button class="button_no_style">My Profile</button></a>
+                  <%else%>
+                    <a href="/signup"><button class="button_no_style">My Profile</button></a>
+                  <%end%>
+                </li>
+                <li>
+                  <a href="/profile/edit"><button class="button_no_style">Edit Profile</button></a>
+                </li>
+                <li>
+                  <a href="/logout"><button class="button_no_style" type="submit" style="">Logout</button></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </h3>
+  </div>
+  <%end%>
+</div>
+<div class="row">
+  <div class="col-md-1" style="height: 70.5px;"></div>
+</div>
+  <%= yield %>
+  <div class="row">
+  <%= "#{Rails.env}"%>
+  <div class="col-md-1" style="height: 40.5px;"></div>
+</div>
+</div>
+</body>
+</html>

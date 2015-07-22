@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6 box post">
+    <h2>Edit Profile</h2>
+    
+    <%if session[:message_profile]%>
+    <p><span><%=session[:message_profile]%></span></p>
+    <%else%>
+
+    <%end%>
+
+    <form action="/profile/edit/submit" method="POST" enctype="multipart/form-data">
+      <fieldset>
+        <label>First Name<br><input name="firstName" type="text" value="<%=@user.first_name%>" style="width:200px;"></label>
+        <label>Last Name<br><input name="lastName"  type="text" value="<%=@user.last_name%>" style="width:200px;"></label><br>
+        <label>Email<br><input name="email"  type="text" value="<%=@user.email%>" style="width: 250px;"></label><br>
+        <label>Current Password<br><input name="password" type="password" value="<%=@user.password%>" style="width:150px;"></label>
+        <div class="arrow_right"></div>
+        <label>Retype Current<br><input name="retypePassword" type="password" value="" style="width:150px;" ></label>
+        <label>New Password<br><input name="newPassword" type="password" style="width:150px;"></label><br>
+        <label>Change Profile Picture (Square Images Work Best)<br><input type="file" name="theFile" class="uploadButton"></label><br>
+        <button type="submit">Save Changes</button>
+      </fieldset>
+    </form>
+    
+  </div>
+</div>

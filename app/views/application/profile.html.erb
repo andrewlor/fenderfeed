@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6 box">
+    <div class="col-md-2">
+      <%if @user.uploadCustomPic%>
+        <div class="crop">
+          <img src="<%=@user.pathToFile%>">
+        </div>
+      <%else%>
+        <div class="crop">
+          <img src="https://carsiteuploads.s3.amazonaws.com/imgs/profile.png"> 
+        </div>
+      <%end%>
+    </div>
+    <div class="col-md-4">
+      <h2><%=@user.first_name + " " + @user.last_name%></h2>
+      <%if @user.posts.count == 1%>
+        <h3><%=@user.posts.count%> Total Post</h3>
+      <%else%>
+        <h3><%=@user.posts.count%> Total Posts</h3>
+      <%end%>
+    </div>
+
+  </div>
+  <form action="/profile/edit" method="GET">
+    <button type="submit" style="background-color: #969696;">Edit Profile</button>
+  </form>
+</div>
+
+<div class="row">
+  <div class="col-md-1" style="height: 30px;"></div>
+</div>
+
+<%@posts.reverse_order.each do |post|%>
+  
+  <div class="row">
+    <div class="col-md-3"></div>
+    <a href="/posts/<%=post.id%>">
+      <div class="col-md-6 box post">
+        <div class="col-md-10" style="margin: 0px; padding:0px;">
+          <h2><%=post.title%></h2>
+    </a>
+    <a href="/categories/<%=post.category_id%>">
+          <p style="display: inline;" class="link">(<%=Category.find(post.category_id).name%>)</p>
+          </a>
+          <a href="/posts/<%=post.id%>">
+          <p><span><%=getTime(post.created_at)%></span></p>
+        </div>
+
+        <div class="col-md-2" style="margin: 0px; padding:0px;">
+          <form action="/posts/<%=post.id%>/likes" method="POST">
+            <button style="float:right; padding: 5px;">
+              <p style="display: inline;"><%=post.likes.count%></p>
+              <%if post.likes.find_by(user_id: session[:user_id])%>
+                <img src="https://carsiteuploads.s3.amazonaws.com/imgs/thumbsUp2.png" style="width: 25px; display: inline; margin: 10px;">
+              <%else%>
+                <img src="https://carsiteuploads.s3.amazonaws.com/imgs/thumbsUp.png" style="width: 25px; display: inline; margin: 10px;">
+              <%end%>
+            </button>
+            <input type="hidden" name="redirect" value="<%=request.path_info%>">
+          </form>
+        </div>
+        <img src="<%=post.pathToFile%>" class="postImg">
+
+        <p><%=post.content%></p>
+      </div>
+    </a>
+  </div>
+ 
+
+  <div class="row">
+    <div class="col-md-1" style="height: 30px;"></div>
+  </div>
+<%end%>

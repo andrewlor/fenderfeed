@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-4">
+    <h1>Welcome to<br><a href="/"><span>Fenderfeed.com</span></a></h1>
+    <img src="https://carsiteuploads.s3.amazonaws.com/imgs/930.png" style="width: 300px;">
+  </div>
+  <div class="col-md-2"></div>
+  <div class="col-md-3 box">
+    <h3>Sign Up</h3>
+    <p><%= session[:error_signup]%></p>
+    <form action="/signup" method="POST">
+      <fieldset>
+        <label><input name="firstName" type="text" placeholder="First Name"></label>
+        <label><input name="lastName"  type="text" placeholder="Last Name"></label><br>
+        <label><input name="email"  type="text" placeholder="Email"></label>
+        <label><input name="password" type="password" placeholder="Password"></label><br>
+        <button type="submit">Sign Up</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-4" style="height: 30px;">
+    <h3>A car photo sharing network</h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-7"></div>
+  <div class="col-md-3 box">
+  <h3>Login</h3>
+    <p><%= session[:error_login]%></p>
+    <form action="/login" method="POST">
+      <fieldset>
+        <label><input name="email" type="text" placeholder="Email"></label><br>
+        <label><input name="password" type="password" placeholder="Password"></label><br>
+        <button type="submit">Login</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
