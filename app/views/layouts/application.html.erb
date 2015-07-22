@@ -51,31 +51,31 @@
       <h3 class="col-md-2 menu_profile">
         <%if session[:user_id]%>
           Hi, <%=@user.first_name%>
+          <div class="menu_profile_popup">
+            <div class="arrow_up"></div>
+            <div class="box">
+              <div class="menu_profile_text">
+                <ul>
+                  <li>
+                    <%if session[:user_id]%>
+                      <a href="/users/<%=@user.id%>"><button class="button_no_style">My Profile</button></a>
+                    <%else%>
+                      <a href="/signup"><button class="button_no_style">My Profile</button></a>
+                    <%end%>
+                  </li>
+                  <li>
+                    <a href="/profile/edit"><button class="button_no_style">Edit Profile</button></a>
+                  </li>
+                  <li>
+                    <a href="/logout"><button class="button_no_style" type="submit" style="">Logout</button></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         <%else%>
           <a href="/signup">Signup or Login</a>
         <%end%>
-        <div class="menu_profile_popup">
-          <div class="arrow_up"></div>
-          <div class="box">
-            <div class="menu_profile_text">
-              <ul>
-                <li>
-                  <%if session[:user_id]%>
-                    <a href="/users/<%=@user.id%>"><button class="button_no_style">My Profile</button></a>
-                  <%else%>
-                    <a href="/signup"><button class="button_no_style">My Profile</button></a>
-                  <%end%>
-                </li>
-                <li>
-                  <a href="/profile/edit"><button class="button_no_style">Edit Profile</button></a>
-                </li>
-                <li>
-                  <a href="/logout"><button class="button_no_style" type="submit" style="">Logout</button></a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </h3>
   </div>
   <%end%>
