@@ -1,8 +1,0 @@
-development:
-  S3_KEY: a
-  S3_SECRET: a
-  S3_BUCKET: a
-production:
-  S3_KEY: a
-  S3_SECRET: a
-  S3_BUCKET: a
